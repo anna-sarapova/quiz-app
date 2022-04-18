@@ -1,0 +1,42 @@
+{
+  "data": {
+    "title": "movies quiz",
+    "questions": [
+      {
+        "question": "In Back to the Future, what year does Marty McFly travel back in time to?",
+        "answers": ["1945", "1950", "1955", "1960"],
+        "correct_answer": "1955"
+      },
+      {
+        "question": "In Coming to America, Prince Akeem and Semmi take jobs working at a knock-off of which company?",
+        "answers": ["Walmart", "McDonald's", "Chuck E. Cheese", "Blockbuster Video"],
+        "correct_answer": "McDonald's"
+      },
+      {
+        "question": "Where did Kevin's family travel to in Home Alone?",
+        "answers": ["Paris", "New York", "London", "Los Angeles"],
+        "correct_answer": "Paris"
+      },
+      {
+        "question": "What is the name of the villainous teddy bear in Toy Story 3?",
+        "answers": ["Hugs-A-Lot", "Paddy", "Fitz-O", "Lotso"],
+        "correct_answer": "Lotso"
+      },
+      {
+        "question": "In Tangled, what is Flynn Rider's real name?",
+        "answers": ["Eugene Fitzherbert", "Hebert Barney", "Melvin Orvillert", "Morris Mortimer"],
+        "correct_answer": "Eugene Fitzherbert"
+      },
+      {
+        "question": "In The Hunger Games, what District were Katniss and Peeta from?",
+        "answers": ["District 5", "District 9", "District 12", "District 15"],
+        "correct_answer": "District 12"
+      },
+      {
+        "question": "In Frozen, what event brings Prince Hans to Arendelle?",
+        "answers": ["Anna's 18th birthday", "Elsa's 20th birthday", "Arendelle's bicentennial", "Elsa's coronation"],
+        "correct_answer": "Elsa's coronation"
+      }
+    ]
+  }
+}
