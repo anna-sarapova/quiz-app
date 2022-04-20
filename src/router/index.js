@@ -1,24 +1,26 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from "@/views/Home.vue";
-import About from "@/views/About.vue";
+import Home from "../components/Home.vue";
 import Register from "../components/Register.vue";
+import QuizWindow from "../components/QuizWindow.vue";
 
 const routes = [
     {
         path: "/",
         name: "Home",
         component: Home,
-    },
-    {
-        path: "/about",
-        name: "About",
-        component: About,
-    },
-    {
-        path: "/register",
-        name: "Register",
-        component: Register,
-    },
+        children: [
+            {
+                path: "/all",
+                name: "all",
+                component: QuizWindow,
+            },
+            {
+                path: "/register",
+                name: "Register",
+                component: Register,
+            }
+        ]
+    }
 ];
 
 const router = createRouter({

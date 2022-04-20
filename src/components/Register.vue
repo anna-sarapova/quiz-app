@@ -19,6 +19,7 @@
                     >Name</label
                     ><input
                       type="name"
+                      v-model="form.name"
                       class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                       placeholder="Name"
                       style="transition: all 0.15s ease 0s;"
@@ -31,6 +32,7 @@
                     >Surname</label
                     ><input
                       type="surname"
+                      v-model="form.surname"
                       class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                       placeholder="Surname"
                       style="transition: all 0.15s ease 0s;"
@@ -40,6 +42,7 @@
                     <button
                         class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                         type="button"
+                        @click="register"
                         style="transition: all 0.15s ease 0s;"
                     >
                       Register
@@ -56,8 +59,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  name: "Login"
+  name: "Register",
+  data() {
+    return {
+      form: {
+        name: "",
+        surname: ""
+      }
+    }
+  },
+  mounted() {
+    console.log(this.$store.state.user)
+  },
+  methods: {
+    register() {
+      this.$store.dispatch('register', this.form)
+    }
+  }
 }
 </script>
 

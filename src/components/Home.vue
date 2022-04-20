@@ -34,32 +34,34 @@
         <span class="text-xl font-extrabold text-white">Quiz Planet</span>
       </a>
       <nav>
-        <a href="/"
-           class="flex items-center py-3 px-4 hover:bg-indigo-700 rounded hover:text-indigo-200 transition duration-200">
+        <div class="flex items-center py-3 px-4 hover:bg-indigo-700 rounded hover:text-indigo-200 transition duration-200">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round"
                   d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
           </svg>
-          <span class="text-white px-1" @click="getQuizzes">Home</span>
-        </a>
-        <a href="/"
-           class="flex items-center py-3 px-4 hover:bg-indigo-700 rounded hover:text-indigo-200 transition duration-200">
+          <router-link :to="{name: 'Home'}">
+            <span class="text-white px-1" @click="getQuizzes">Home</span>
+          </router-link>
+        </div>
+        <div class="flex items-center py-3 px-4 hover:bg-indigo-700 rounded hover:text-indigo-200 transition duration-200">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round"
                   d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/>
           </svg>
           <span class="text-white px-1">Create Quiz</span>
-        </a>
-        <a href="/"
-           class="flex items-center py-3 px-4 hover:bg-indigo-700 rounded hover:text-indigo-200 transition duration-200">
+        </div>
+         <div class="flex items-center py-3 px-4 hover:bg-indigo-700 rounded hover:text-indigo-200 transition duration-200">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round"
                   d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
-          <span class="text-white px-1">Register</span></a>
+          <router-link :to="{name: 'Register'}">
+            <span class="text-white px-1">Register</span>
+          </router-link>
+         </div>
       </nav>
     </div>
 
@@ -77,7 +79,10 @@
         <h2 class="text-2xl font-extrabold tracking-tight text-purple-900 text-center">Chose the quiz you want to try</h2>
       </div>
       <!--Content-->
-      <div class="p-8 text-purple-800 font-extrabold"><QuizWindow /></div>
+      <div class="p-8 text-purple-800 font-extrabold">
+        <router-view />
+<!--        <QuizWindow />-->
+      </div>
     </div>
   </div>
 </template>
@@ -97,13 +102,11 @@ export default {
   },
   methods: {
     async getQuizzes() {
-
     }
   }
 };
 </script>
 
-<style>
-.text-purple-100 {
-}
+<style scoped>
+
 </style>

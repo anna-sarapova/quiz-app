@@ -1,0 +1,107 @@
+{
+  "data": {
+    "title": "General Knowledge",
+    "questions": [
+      {
+        "question": "Who is a co-founder of music streaming service Spotify?",
+        "answers": [
+          "Sean Parker",
+          "Daniel Ek",
+          "Michael Breidenbruecker",
+          "Felix Miller"
+        ],
+        "correct_answer": "Daniel Ek"
+      },
+      {
+        "question": "What is the romanized Russian word for &quot;winter&quot;?",
+        "answers": [
+          "Osen&#039;",
+          "Leto",
+          "Zima",
+          "Vesna"
+        ],
+        "correct_answer": "Zima"
+      },
+      {
+        "question": "The term &quot;scientist&quot; was coined in which year?",
+        "answers": [
+          "1796",
+          "1942",
+          "1833",
+          "1933"
+        ],
+        "correct_answer": "1833"
+      },
+      {
+        "question": "Amsterdam Centraal station is twinned with what station?",
+        "answers": [
+          "Frankfurt (Main) Hauptbahnhof",
+          "Brussels Midi",
+          "Paris Gare du Nord",
+          "London Liverpool Street"
+        ],
+        "correct_answer": "London Liverpool Street"
+      },
+      {
+        "question": "Which slogan did the fast food company, McDonald&#039;s, use before their &quot;I&#039;m Lovin&#039; It&quot; slogan?",
+        "answers": [
+          "We Love to See You Smile",
+          "Making People Happy Through Food",
+          "Have It Your Way",
+          "Why Pay More!?"
+        ],
+        "correct_answer": "We Love to See You Smile"
+      },
+      {
+        "question": "Which item of clothing is usually worn by a Scotsman at a wedding?",
+        "answers": [
+          "Skirt",
+          "Dress",
+          "Rhobes",
+          "Kilt"
+        ],
+        "correct_answer": "Kilt"
+      },
+      {
+        "question": "Which of these words means &quot;idle spectator&quot;?",
+        "answers": [
+          "Jentacular",
+          "Gossypiboma",
+          "Gongoozler",
+          "Meupareunia"
+        ],
+        "correct_answer": "Gongoozler"
+      },
+      {
+        "question": "What is the currency of Poland?",
+        "answers": [
+          "Krone",
+          "Euro",
+          "Z\\u0142oty",
+          "Ruble"
+        ],
+        "correct_answer": "Z\\u0142oty"
+      },
+      {
+        "question": "Which American manufactured submachine gun was informally known by the American soldiers that used it as &quot;Grease Gun&quot;?",
+        "answers": [
+          "Colt 9mm",
+          "M3",
+          "Thompson",
+          "MAC-10"
+        ],
+        "correct_answer": "M3"
+      },
+      {
+        "question": "Frank Lloyd Wright was the architect behind what famous building?",
+        "answers": [
+          "Sydney Opera House",
+          "The Space Needle",
+          "The Guggenheim",
+          "Villa Savoye"
+        ],
+        "correct_answer": "The Guggenheim"
+      }
+    ]
+  }
+}

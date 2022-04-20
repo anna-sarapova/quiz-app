@@ -1,23 +1,12 @@
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import SideBar from "./components/SideBar.vue";
-
-// fetch('https://pure-caverns-82881.herokuapp.com/api/v54/quizzes', {
-//     headers: {
-//     'X-Access-Token': '266e46777f10157b3a8d16fc3a096eb5a30d9a3e85e1c0e875f80b4b3b413dc5'
-//   }
-// })
-//     .then(response => response.json())
-//     .then(data => console.log(data))
-    // .catch( error => console.error(error))
-
-
+import Home from "./components/Home.vue";
+import QuizElement from "./components/QuizElement.vue";
+// import Register from "./components/Register.vue"
 </script>
 
 <template>
-  <SideBar />
-
+  <router-view />
+<!--  <QuizElement />-->
 </template>
 
 <style>

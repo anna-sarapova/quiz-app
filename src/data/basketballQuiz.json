@@ -1,0 +1,47 @@
+{
+  "data": {
+    "title": "Basketball quiz",
+    "questions": [
+      {
+        "question": "Basketball has one of the highest rates of injuries of which area of the body??",
+        "answers": ["Knees", "Lower back", "Ankles", "Ego"],
+        "correct_answer": "Ankles"
+      },
+      {
+        "question": "Not inbounding the ball quickly enough results in a ______",
+        "answers": ["2-second violation", "3-second violation", "4-second violation", "5-second violation"],
+        "correct_answer": "5-second violation"
+      },
+      {
+        "question": "Which of the following are influences on you as a basketball player?",
+        "answers": ["LeBron James", "Michael Jordon", "Wilt Chamberlin", "All of them"],
+        "correct_answer": "All of them"
+      },
+      {
+        "question": "Why does an offense get two points if the ball is tipped above the rim by a defender?",
+        "answers": ["Goaltending", "Scoring block", "Early blocking foul", "Stoppage"],
+        "correct_answer": "Goaltending"
+      },
+      {
+        "question": "Each team is allowed to put how many players on the court?",
+        "answers": ["3", "5", "7", "11"],
+        "correct_answer": "5"
+      },
+      {
+        "question": "Are you familiar with how the NBA determines who gets the basketball to start a game?",
+        "answers": ["Coin flip", "Home team", "Away team", "Tip off"],
+        "correct_answer": "Tip off"
+      },
+      {
+        "question": "If a player wants to substitute into the game, they must go where?",
+        "answers": ["Substitution line", "Scorer's table", "Entrance table", "Entrance box"],
+        "correct_answer": "Scorer's table"
+      },
+      {
+        "question": "An offense must get a shot off before the play clock runs out. How long do they have?",
+        "answers": ["24 seconds", "30 seconds", "35 seconds", "40 seconds"],
+        "correct_answer": "24 seconds"
+      }
+    ]
+  }
+}
