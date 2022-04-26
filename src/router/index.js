@@ -10,8 +10,8 @@ const routes = [
         component: Home,
         children: [
             {
-                path: "/all",
-                name: "all",
+                path: "/quizzes",
+                name: "QuizWindow",
                 component: QuizWindow,
             },
             {

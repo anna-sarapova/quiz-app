@@ -41,7 +41,7 @@
                   d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
           </svg>
           <router-link :to="{name: 'Home'}">
-            <span class="text-white px-1" @click="getQuizzes">Home</span>
+            <span class="text-white px-1">Home</span>
           </router-link>
         </div>
         <div class="flex items-center py-3 px-4 hover:bg-indigo-700 rounded hover:text-indigo-200 transition duration-200">
@@ -50,7 +50,9 @@
             <path stroke-linecap="round" stroke-linejoin="round"
                   d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z"/>
           </svg>
-          <span class="text-white px-1">Create Quiz</span>
+          <router-link :to="{name: 'QuizWindow'}">
+          <span class="text-white px-1" @click="getQuizzes">Quizzes</span>
+          </router-link>
         </div>
          <div class="flex items-center py-3 px-4 hover:bg-indigo-700 rounded hover:text-indigo-200 transition duration-200">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -80,8 +82,8 @@
       </div>
       <!--Content-->
       <div class="p-8 text-purple-800 font-extrabold">
+        <div>Welcome</div>
         <router-view />
-<!--        <QuizWindow />-->
       </div>
     </div>
   </div>

@@ -1,53 +1,206 @@
 <template>
-<!--quiz container-->
-  <div>
-    <div class="bg-white container shadow-lg rounded-lg px-32 py-6">
-      <!--question container-->
-      <div class="rounded-lg bg-purple-600 p-2 text-center text-gray-800 font-bold">
-        <div class="rounded-lg bg-gray-100 p-5">
-          Alalaallala xdlcdfmcfvf
+  <main class="flex h-screen items-center justify-center bg-gray-100">
+
+    <QuizComplete v-if="endQuiz"/>
+    <!-- quiz container -->
+    <div
+        class="overflow-hidden bg-white flex-none container relative shadow-lg rounded-lg px-12 py-6"
+    >
+      <!-- contents -->
+      <div class="relative z-20">
+        <!-- score container -->
+        <div class="text-right text-gray-800">
+          <p class="text-sm leading-3">Score</p>
+          <p class="font-bold">{{ score }}</p>
         </div>
-      </div>
 
+        <!-- timer container -->
+        <div class="bg-white shadow-lg p-1 rounded-full w-full h-5 mt-4">
+          <div class="bg-blue-700 rounded-full w-11/12 h-full"
+          :style = "`width:${timer}%`">
+          </div>
+        </div>
 
-    <!--options container-->
-    <div class="mt-10">
-      <!--option container-->
-      <div class="bg-gray-100 rounded-lg p-2">
-        <div class="bg-white rounded-lg font-bold flex p-2 mb-3">
-          <!--option ID-->
-          <div class="bg-purple-400 p-3 rounded-lg">A</div>
-          <!--option name-->
-          <div class="flex items-center pl-6">LALALALA</div>
+        <!-- question container -->
+        <div
+            class="rounded-lg bg-gray-100 p-2 neumorph-1 text-center font-bold text-gray-800 mt-8"
+        >
+          <div class="bg-white p-5">
+            {{ currentQuestion.question }}
+          </div>
+        </div>
+
+        <!-- options container -->
+
+        <div class="mt-8">
+          <!-- option container -->
+          <div v-for="(choice, item) in currentQuestion.answers" :key="item">
+            <div
+                class="neumorph-1 option-default bg-gray-100 p-2 rounded-lg mb-3 relative"
+                :ref="optionChosen"
+                @click="onOptionClick(choice, item)">
+              <div
+                  class="bg-blue-700 p-1 transform rotate-45 rounded-md h-10 w-10 text-white font-bold absolute right-0 top-0 shadow-md"
+              >
+                <p class="transform -rotate-45">+10</p>
+              </div>
+              <div class="rounded-lg font-bold flex p-2">
+                <!-- option ID -->
+                <div class="p-3 rounded-lg">{{ item }}</div>
+
+                <!-- option name -->
+                <div class="flex items-center pl-6">{{ choice }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- progress indicator container -->
+          <div class="mt-8 text-center">
+            <div class="h-1 w-12 bg-gray-800 rounded-full mx-auto"></div>
+            <p class="font-bold text-gray-800">{{ questionCounter }}/{{ questions.length}}</p>
+          </div>
         </div>
       </div>
     </div>
-
-
-      <!--option container-->
-      <div class="bg-gray-100 rounded-lg p-2">
-        <div class="bg-white rounded-lg font-bold flex p-2 mb-3 relative">
-          <!--option ID-->
-          <div class="bg-purple-400 p-3 rounded-lg">A</div>
-          <!--option name-->
-          <div class="flex items-center pl-6">LALALALA</div>
-        </div>
-      </div>
-    </div>
-
-
-
-  </div>
+  </main>
 </template>
 
+<style scoped>
+.neumorph-1 {
+  box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.09), -6px -6px 18px #ffffff;
+}
+.container {
+  max-width: 400px;
+  border-radius: 25px;
+}
+</style>
+
 <script>
+import {onMounted, ref} from "vue";
+import QuizComplete from "./QuizComplete.vue";
+
 export default {
-  name: "QuizElement"
+  setup() {
+    let canCLick = true
+    let timer = ref(100)
+    let endQuiz = ref(false)
+    let questionCounter = ref(0)
+    let score = ref(0)
+    const currentQuestion = ref({
+      question: "",
+      answers: [],
+      correct_answer: ""
+    });
+
+    const questions = [];
+
+    const loadQuestion = () => {
+      canCLick = true
+      if(questions.length > questionCounter.value) {
+        // load question
+        timer.value = 100
+        currentQuestion.value = questions[questionCounter.value]
+        questionCounter.value++
+      } else {
+        // no more questions
+        endQuiz.value = true
+        console.log("Out of questions")
+      }
+    };
+
+    let itemsRef = []
+    const optionChosen = (element) => {
+      if(element) {
+        itemsRef.push(element)
+      }
+    }
+
+    const countDownTimer = function() {
+      let interVal = setInterval(() => {
+        if (timer.value > 0) {
+          timer.value--;
+        } else {
+          console.log("timer is up");
+          // onQuizEnd();
+          clearInterval(interVal);
+        }
+      }, 150);
+    };
+
+    const clearSelectedAnswer = (divSelected) => {
+      setTimeout(() => {
+        divSelected.classList.remove("option-correct")
+        divSelected.classList.remove("option-wrong")
+        divSelected.classList.add("option-default")
+        loadQuestion()
+      }, 1000)
+
+    }
+
+    const onOptionClick = (choice, item) => {
+      if(canCLick) {
+        const divContainer = itemsRef[item]
+        if (currentQuestion.value.correct_answer === choice) {
+          console.log('You are correct')
+          score.value += 10
+          divContainer.classList.add("option-correct")
+          divContainer.classList.remove("option-default")
+
+        } else {
+          console.log('You are wrong')
+          divContainer.classList.add("option-wrong")
+          divContainer.classList.remove("option-default")
+        }
+        timer.value = 100
+        canCLick = false
+        clearSelectedAnswer(divContainer)
+        console.log(choice, item)
+      } else {
+        console.log("Can not select an option")
+      }
+    }
+
+    const fetchQuestions = async function () {
+      console.log("Fetch questions")
+      fetch("https://pure-caverns-82881.herokuapp.com/api/v54/quizzes/353?user_id=1059", {
+        headers: {'X-Access-Token': '3e7c3a2d3116eb08ad9e1dfd34fb548fd3796a8987d72a624b7e879cc40a7966'}
+      })
+        .then((response) => {
+          return response.json()
+        })
+        .then((data) => {
+          console.log(data)
+          const newQuestions = data.questions.map((serverQuestion) => {
+            const  arrangedQuestion = {
+              question: serverQuestion.question,
+              answers: "",
+              correct_answer: ""
+            }
+            const answers = serverQuestion.answers
+            arrangedQuestion.answers = answers
+            console.log(answers)
+            const correct_answer = serverQuestion.correct_answer
+            // console.log(correct_answer)
+            // console.log(arrangedQuestion.question)
+
+            return arrangedQuestion
+          })
+          console.log("new formatted questions", newQuestions)
+          questions.value = newQuestions
+          loadQuestion()
+          countDownTimer()
+      })
+    }
+
+    onMounted(() => {
+      // loadQuestion()
+      // countDownTimer()
+      fetchQuestions()
+    })
+    return { currentQuestion, questions, questionCounter, score, timer, endQuiz, loadQuestion, onOptionClick, optionChosen };
+  },
+  components: {
+    QuizComplete
+  }
 }
 </script>
-
-<style scoped>
-/*.neumorph-1 {*/
-/*  box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.09), -6px -6px 18px #ffffff;*/
-/*}*/
-</style>
