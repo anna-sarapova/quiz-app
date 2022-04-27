@@ -1,6 +1,6 @@
 <template>
   <div
-      class="w-screen h-screen absolute z-30 bg-black bg-opacity-60 flex justify-center items-center"
+      class="w-5/6 h-screen absolute z-30 bg-black bg-opacity-60 flex justify-center items-center"
   >
     <div class="bg-green-700 p-4 text-center text-white">
       <p class="font-bold text-2xl">All Done!</p>

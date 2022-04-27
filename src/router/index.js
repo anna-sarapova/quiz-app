@@ -4,6 +4,7 @@ import Register from "../components/Register.vue";
 import QuizWindow from "../components/QuizWindow.vue";
 import QuizElement from "../components/QuizElement.vue";
 import RawRouter from "../components/RawRouter.vue";
+import DefaultHomePage from "../components/DefaultHomePage.vue";
 
 const routes = [
     {
@@ -32,6 +33,11 @@ const routes = [
                 path: "/register",
                 name: "Register",
                 component: Register,
+            },
+            {
+                path: "",
+                name: "HomePage",
+                component: DefaultHomePage,
             }
         ]
     }

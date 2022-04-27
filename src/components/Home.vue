@@ -40,7 +40,7 @@
             <path stroke-linecap="round" stroke-linejoin="round"
                   d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/>
           </svg>
-          <router-link :to="{name: 'Home'}">
+          <router-link :to="{name: 'HomePage'}">
             <span class="text-white px-1">Home</span>
           </router-link>
         </div>
@@ -69,23 +69,24 @@
 
     <!--Main Content-->
     <div class="flex-1">
+
       <!--Header-->
-      <div class="bg-white shadow px-2 py-4">
+      <div class="
+           bg-indigo-900
+           text-purple-100 shadow px-2 py-4">
         <button
             @click="showSidebar = !showSidebar"
-            class="text-indigo-800 font-extrabold md:hidden">
+            class="text-indigo-100 font-extrabold md:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
         </button>
-        <h2 class="text-2xl font-extrabold tracking-tight text-purple-900 text-center">Chose the quiz you want to try</h2>
+        <h2 class="text-2xl font-extrabold tracking-tight text-center">Welcome to the Quiz Planet</h2>
       </div>
       <!--Content-->
-      <div class="p-8 text-purple-800 font-extrabold">
-        <div>Welcome</div>
-        <router-view />
-      </div>
+      <router-view />
     </div>
+
   </div>
 </template>
 

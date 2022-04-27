@@ -1,18 +1,18 @@
 <template>
-  <main class="flex h-screen items-center justify-center bg-gray-100">
+  <main class="flex h-11/12 items-center justify-center bg-white-100">
 
     <QuizComplete v-if="endQuiz"
                   :percent="percentageScore"/>
     <!-- quiz container -->
     <div
-        class="overflow-hidden bg-white flex-none container relative shadow-lg rounded-lg px-12 py-6"
+        class="overflow-hidden bg-white flex-none container relative shadow-lg rounded-lg px-12 py-4"
     >
       <!-- contents -->
-      <div class="relative z-20">
+      <div class="relative z-15">
         <!-- score container -->
         <div class="text-right text-gray-800">
           <p class="text-sm leading-3">Score</p>
-          <p class="font-bold">{{ score }}</p>
+          <p class="font-bold">{{ score }} points</p>
         </div>
 
         <!-- timer container -->
@@ -26,14 +26,14 @@
         <div
             class="rounded-lg bg-gray-100 p-2 neumorph-1 text-center font-bold text-gray-800 mt-8"
         >
-          <div class="bg-white p-5">
+          <div class="bg-white p-3 rounded-lg">
             {{ currentQuestion.question }}
           </div>
         </div>
 
         <!-- options container -->
 
-        <div class="mt-8">
+        <div class="mt-6">
           <!-- option container -->
           <div v-for="(choice, item) in currentQuestion.answers" :key="item">
             <div
@@ -76,11 +76,6 @@
 }
 </style>
 
-<!--TODO get questions from one quiz-->
-<!--TODO use user ID from state to complete quiz-->
-<!--TODO submit answer and get score-->
-<!--TODO make quiz appear @onclick from home page-->
-
 <script>
 import {onMounted, ref} from "vue";
 import QuizComplete from "./QuizComplete.vue";
@@ -114,7 +109,7 @@ export default {
         questionCounter.value++
       } else {
         // no more questions
-        endQuiz.value = true
+        onQuizEnd()
         console.log("Out of questions")
       }
     }
@@ -132,7 +127,7 @@ export default {
           timer.value--
         } else {
           console.log("timer is up")
-          // onQuizEnd()
+          onQuizEnd()
           clearInterval(interVal)
         }
       }, 150)
@@ -223,12 +218,16 @@ export default {
       })
     }
 
+    const onQuizEnd = function () {
+      percentageScore.value = parseFloat((score.value * 100) / (questions.length * 10)).toFixed(1)
+      timer.value = 0
+      endQuiz.value = true
+    }
+
     onMounted(() => {
-      // loadQuestion()
-      // countDownTimer()
       fetchQuestions()
     })
-    return { currentQuestion, questions, questionCounter, score, timer, endQuiz, loadQuestion, onOptionClick, optionChosen };
+    return { currentQuestion, questions, questionCounter, score, timer, endQuiz, percentageScore, loadQuestion, onOptionClick, optionChosen };
   },
   components: {
     QuizComplete
