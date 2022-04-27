@@ -1,15 +1,8 @@
 <script setup>
-import Home from "./components/Home.vue";
-import QuizElement from "./components/QuizElement.vue";
-// import Register from "./components/Register.vue"
-import Element from "./components/Element.vue";
 </script>
 
 <template>
-<!--  <router-view />-->
-  <QuizElement />
-<!--  <Element />-->
-
+  <router-view />
 </template>
 
 <style>

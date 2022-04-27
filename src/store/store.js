@@ -18,7 +18,7 @@ export const store = createStore({
         register({commit}, data) {
             fetch('https://pure-caverns-82881.herokuapp.com/api/v54/users', {
                 headers: {
-                    'X-Access-Token': '266e46777f10157b3a8d16fc3a096eb5a30d9a3e85e1c0e875f80b4b3b413dc5',
+                    'X-Access-Token': '3e7c3a2d3116eb08ad9e1dfd34fb548fd3796a8987d72a624b7e879cc40a7966',
                     'Content-Type': 'application/json',
                 },
                 method: 'POST',

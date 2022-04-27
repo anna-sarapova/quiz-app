@@ -2,6 +2,8 @@ import { createWebHistory, createRouter } from "vue-router";
 import Home from "../components/Home.vue";
 import Register from "../components/Register.vue";
 import QuizWindow from "../components/QuizWindow.vue";
+import QuizElement from "../components/QuizElement.vue";
+import RawRouter from "../components/RawRouter.vue";
 
 const routes = [
     {
@@ -12,7 +14,19 @@ const routes = [
             {
                 path: "/quizzes",
                 name: "QuizWindow",
-                component: QuizWindow,
+                component: RawRouter,
+                children: [
+                    {
+                        path: ":id",
+                        name: "quiz" ,
+                        component: QuizElement,
+                    },
+                    {
+                        path: "",
+                        name: "all_quizzes" ,
+                        component: QuizWindow,
+                    },
+                ]
             },
             {
                 path: "/register",

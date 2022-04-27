@@ -1,7 +1,8 @@
 <template>
   <main class="flex h-screen items-center justify-center bg-gray-100">
 
-    <QuizComplete v-if="endQuiz"/>
+    <QuizComplete v-if="endQuiz"
+                  :percent="percentageScore"/>
     <!-- quiz container -->
     <div
         class="overflow-hidden bg-white flex-none container relative shadow-lg rounded-lg px-12 py-6"
@@ -57,7 +58,7 @@
           <!-- progress indicator container -->
           <div class="mt-8 text-center">
             <div class="h-1 w-12 bg-gray-800 rounded-full mx-auto"></div>
-            <p class="font-bold text-gray-800">{{ questionCounter }}/{{ questions.length}}</p>
+            <p class="font-bold text-gray-800">{{ questionCounter }}</p>
           </div>
         </div>
       </div>
@@ -75,9 +76,16 @@
 }
 </style>
 
+<!--TODO get questions from one quiz-->
+<!--TODO use user ID from state to complete quiz-->
+<!--TODO submit answer and get score-->
+<!--TODO make quiz appear @onclick from home page-->
+
 <script>
 import {onMounted, ref} from "vue";
 import QuizComplete from "./QuizComplete.vue";
+import {useStore} from "vuex";
+import {useRoute} from "vue-router";
 
 export default {
   setup() {
@@ -86,13 +94,16 @@ export default {
     let endQuiz = ref(false)
     let questionCounter = ref(0)
     let score = ref(0)
+    let percentageScore = ref(0)
+    const store = useStore()
+    const route = useRoute()
     const currentQuestion = ref({
       question: "",
       answers: [],
       correct_answer: ""
     });
 
-    const questions = [];
+    let questions = ref([])
 
     const loadQuestion = () => {
       canCLick = true
@@ -106,7 +117,7 @@ export default {
         endQuiz.value = true
         console.log("Out of questions")
       }
-    };
+    }
 
     let itemsRef = []
     const optionChosen = (element) => {
@@ -118,14 +129,14 @@ export default {
     const countDownTimer = function() {
       let interVal = setInterval(() => {
         if (timer.value > 0) {
-          timer.value--;
+          timer.value--
         } else {
-          console.log("timer is up");
-          // onQuizEnd();
-          clearInterval(interVal);
+          console.log("timer is up")
+          // onQuizEnd()
+          clearInterval(interVal)
         }
-      }, 150);
-    };
+      }, 150)
+    }
 
     const clearSelectedAnswer = (divSelected) => {
       setTimeout(() => {
@@ -140,21 +151,42 @@ export default {
     const onOptionClick = (choice, item) => {
       if(canCLick) {
         const divContainer = itemsRef[item]
-        if (currentQuestion.value.correct_answer === choice) {
-          console.log('You are correct')
-          score.value += 10
-          divContainer.classList.add("option-correct")
-          divContainer.classList.remove("option-default")
+        fetch(`https://pure-caverns-82881.herokuapp.com/api/v54/quizzes/${route.params.id}/submit`, {
+          headers: {
+            'X-Access-Token': '3e7c3a2d3116eb08ad9e1dfd34fb548fd3796a8987d72a624b7e879cc40a7966',
+            'Content-Type': 'application/json',
+          },
+          method: "POST",
+          body: JSON.stringify({
+            "data": {
+              "question_id": currentQuestion.value.id,
+              "answer": choice,
+              "user_id": store.state.user.id
+            }
+          })
+        })
+          .then(response => response.json())
+          // .then(data => console.log(data))
 
-        } else {
-          console.log('You are wrong')
-          divContainer.classList.add("option-wrong")
-          divContainer.classList.remove("option-default")
-        }
-        timer.value = 100
-        canCLick = false
-        clearSelectedAnswer(divContainer)
-        console.log(choice, item)
+          .then((data) => {
+            console.log(data.correct)
+            // if (currentQuestion.value.correct_answer === choice) {
+            if (data.correct === true) {
+              console.log('You are correct')
+              score.value += 10
+              divContainer.classList.add("option-correct")
+              divContainer.classList.remove("option-default")
+
+          } else {
+            console.log('You are wrong')
+            divContainer.classList.add("option-wrong")
+            divContainer.classList.remove("option-default")
+          }
+          timer.value = 100
+          canCLick = false
+          clearSelectedAnswer(divContainer)
+          console.log(choice, item)
+        })
       } else {
         console.log("Can not select an option")
       }
@@ -162,7 +194,7 @@ export default {
 
     const fetchQuestions = async function () {
       console.log("Fetch questions")
-      fetch("https://pure-caverns-82881.herokuapp.com/api/v54/quizzes/353?user_id=1059", {
+      fetch(`https://pure-caverns-82881.herokuapp.com/api/v54/quizzes/${route.params.id}?user_id=${store.state.user?.id}`, {
         headers: {'X-Access-Token': '3e7c3a2d3116eb08ad9e1dfd34fb548fd3796a8987d72a624b7e879cc40a7966'}
       })
         .then((response) => {
@@ -172,21 +204,20 @@ export default {
           console.log(data)
           const newQuestions = data.questions.map((serverQuestion) => {
             const  arrangedQuestion = {
+              id: serverQuestion.id,
               question: serverQuestion.question,
-              answers: "",
-              correct_answer: ""
+              answers: serverQuestion.answers,
             }
-            const answers = serverQuestion.answers
-            arrangedQuestion.answers = answers
-            console.log(answers)
-            const correct_answer = serverQuestion.correct_answer
+            // const answers = serverQuestion.answers
+            // arrangedQuestion.answers = answers
+            // console.log(answers)
             // console.log(correct_answer)
             // console.log(arrangedQuestion.question)
 
             return arrangedQuestion
           })
           console.log("new formatted questions", newQuestions)
-          questions.value = newQuestions
+          questions = newQuestions
           loadQuestion()
           countDownTimer()
       })
