@@ -32,7 +32,6 @@
   </div>
 </template>
 
-
 <script>
 export default {
   data() {
@@ -49,11 +48,6 @@ export default {
       .then(data => console.log(data))
       .catch(error => console.log(error.message))
   },
-  // setup() {
-  //   return {
-  //     quizzes,
-  //   }
-  // },
 }
 </script>
 

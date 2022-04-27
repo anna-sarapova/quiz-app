@@ -140,7 +140,6 @@ export default {
         divSelected.classList.add("option-default")
         loadQuestion()
       }, 1000)
-
     }
 
     const onOptionClick = (choice, item) => {
@@ -161,11 +160,9 @@ export default {
           })
         })
           .then(response => response.json())
-          // .then(data => console.log(data))
 
           .then((data) => {
             console.log(data.correct)
-            // if (currentQuestion.value.correct_answer === choice) {
             if (data.correct === true) {
               console.log('You are correct')
               score.value += 10
@@ -203,12 +200,6 @@ export default {
               question: serverQuestion.question,
               answers: serverQuestion.answers,
             }
-            // const answers = serverQuestion.answers
-            // arrangedQuestion.answers = answers
-            // console.log(answers)
-            // console.log(correct_answer)
-            // console.log(arrangedQuestion.question)
-
             return arrangedQuestion
           })
           console.log("new formatted questions", newQuestions)

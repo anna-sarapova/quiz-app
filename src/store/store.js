@@ -8,12 +8,6 @@ export const store = createStore({
         }
     },
 
-    getters: {
-        something() {
-
-        }
-    },
-
     actions: {
         register({commit}, data) {
             fetch('https://pure-caverns-82881.herokuapp.com/api/v54/users', {
